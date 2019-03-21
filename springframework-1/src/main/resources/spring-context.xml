@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- <bean id="fooComponentC" class="com.sup2is.demo.FooComponentC"/> --> <!--Spring Bean으로 등록-->
+	
+	<!-- FooComponentC 를 Spring Bean에 등록할 때 name이란 field를 생성자로 초기화-->
+	<!-- <bean id="fooComponentC" class="com.sup2is.demo.FooComponentC">
+		<constructor-arg name="name" value="sup2is demo project"></constructor-arg>
+	</bean>
+	 -->
+	 
+    <!-- FooComponentC 를 Spring Bean에 등록할 때 name이란 field를 setter 메서드로 초기화-->
+	<bean id="fooComponentC" class="com.sup2is.demo.FooComponentC">
+		<property name="name" value="sup2is demo project"></property>
+	</bean>
+		
+
+</beans>
