@@ -17,5 +17,17 @@ public class SpringDemoApplicationTests {
 	public void addTest() {
 		System.out.println(myCalculator.add(5, 5));
 	}
+	@Test
+	public void subTest() {
+		System.out.println(myCalculator.sub(5, 5));
+	}
+	@Test
+	public void divisionTest() {
+		System.out.println(myCalculator.division(5, 0));
+	}
+	@Test
+	public void multiplyTest() {
+		System.out.println(myCalculator.multiply(0, 5));
+	}
 
 }
