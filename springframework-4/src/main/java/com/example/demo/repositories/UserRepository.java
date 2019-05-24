@@ -1,9 +1,15 @@
 package com.example.demo.repositories;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-import com.example.demo.User;
+import com.example.demo.model.User;
 
-public class UserRepository implements Repository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
+	User findByName(String name);
+
+	User findByPhone(String phone);
+	
+	User findByEmail(String email);
+	
 }
