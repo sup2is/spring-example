@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,10 +14,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity  //Entity 객체임을 명시
-//@Table(name = "USER")
 public class User {
 
 	@Id
