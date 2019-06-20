@@ -25,25 +25,57 @@
                 </div>
             </form>
         </div>
+        
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
                     <label for="name">What is your name?</label>
                     <input type="text" id="name" class="form-control" placeholder="Your name here...">
                 </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
             </form>
         </div>
     </div>
+    
+    <br>
+    <br>
+    
+        <div class="row">
+        	<div class="col-md-2">
+	        	<a href="#">spring号</a>
+        	</div>
+        	<div class="col-md-2">
+        		<a href="#">python号</a>
+        	</div>
+        	<div class="col-md-2">
+        		<a href="#">c++号</a>
+        	</div>
+        	<div class="col-md-2">
+        	<a href="#">vue号</a>
+        		</div>
+        	<div class="col-md-2">
+        		<a href="#">ruby号</a>
+        	</div>
+        </div>
+    <br>
+    <br>
+    
     <div class="row">
         <div class="col-md-12">
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Greetings</th>
+                    <th colspan="2">Chat (room is : )</th>
                 </tr>
+				<tr>
+					<th>
+						<input type="text" id="chat" class="form-control">
+					</th>
+					<th>
+						<button type="button" class="form-control" value="">Send</button>
+					</th>
+				</tr>
                 </thead>
-                <tbody id="greetings">
+                <tbody id="chats">
                 </tbody>
             </table>
         </div>
