@@ -1,4 +1,10 @@
 var stompClient = null;
+var currentRoom = null;
+
+
+function setRoom(roomName) {
+	currentRoom = roomName;
+}
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -13,7 +19,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/gs-guide-websocket');
+    var socket = new SockJS('/chat');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
@@ -41,10 +47,10 @@ function showGreeting(message) {
 }
 
 $(function () {
-    $("form").on('submit', function (e) {
-        e.preventDefault();
-    });
+    $("form").on('submit', function (e) {e.preventDefault();});
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
+    $("a[href=#]").click(function() {alert();})
+    
 });
