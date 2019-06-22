@@ -47,7 +47,7 @@
     		<a href="#">python号</a>
     	</div>
     	<div class="col-md-2">
-    		<a href="#">c++号</a>
+    		<a href="#">c号</a>
     	</div>
     	<div class="col-md-2">
     	<a href="#">vue号</a>
@@ -64,14 +64,14 @@
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th colspan="2">Chat (room is : )</th>
+                    <th colspan="2">Chat (room is : <span id="currentRoom"> </span>)</th>
                 </tr>
 				<tr>
 					<th>
 						<input type="text" id="chat" class="form-control">
 					</th>
 					<th>
-						<button type="button" class="form-control" value="">Send</button>
+						<button id="send" type="button" class="form-control" >Send</button>
 					</th>
 				</tr>
                 </thead>

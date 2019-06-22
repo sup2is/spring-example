@@ -1,22 +1,23 @@
 package com.sup2is.websocket;
 
-import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.util.HtmlUtils;
-
-import com.sup2is.websocket.model.Greeting;
-import com.sup2is.websocket.model.HelloMessage;
 
 @Controller
 public class ChatController {
-
-    @MessageMapping("/chat/")
-    @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message, @Header("simpSessionId") String sessionId) throws Exception {
-        Thread.sleep(1000); // simulated delay
-        return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
+	
+	@Autowired
+	private SimpMessagingTemplate simpMessagingTemplate;
+	
+    @MessageMapping("/chat/{room}")
+    public void chat(@DestinationVariable("room") String room, 
+    		@DestinationVariable("user") String user, 
+    		@DestinationVariable("content") String content) throws Exception {
+    	
+    	simpMessagingTemplate.convertAndSend("/topic/" + room , content);
     }
 
 }

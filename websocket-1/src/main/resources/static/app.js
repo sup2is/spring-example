@@ -1,9 +1,10 @@
 var stompClient = null;
 var currentRoom = null;
 
-
 function setRoom(roomName) {
-	currentRoom = roomName;
+	currentRoom = roomName.text();
+	$("#currentRoom").text(currentRoom);
+	
 }
 
 function setConnected(connected) {
@@ -24,8 +25,9 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
+        stompClient.subscribe('/topic/spring', function (greeting) {
+        	console.log(greeting)
+            //showGreeting(JSON.parse(greeting.body).content);
         });
     });
 }
@@ -37,6 +39,11 @@ function disconnect() {
     setConnected(false);
     console.log("Disconnected");
 }
+
+function send() {
+    stompClient.send("/app/chat/spring/user/content" , {}, 'dd');
+}
+
 
 function sendName() {
     stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
@@ -50,7 +57,7 @@ $(function () {
     $("form").on('submit', function (e) {e.preventDefault();});
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
-    $("a[href=#]").click(function() {alert();})
-    
+    $( "#send" ).click(function() { send(); });
+    $("a[href=\\#]").click(function() {setRoom($(this))})
 });
+
