@@ -1,0 +1,16 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Hello <b th:text="${user}">user</b></h1>
+<p>user role is <b th:text="${roles}">[ROLE_USER]</b></p>
+
+<a href="/admin">admin</a>
+<a href="/logout">logout</a>
+
+</body>
+</html>
