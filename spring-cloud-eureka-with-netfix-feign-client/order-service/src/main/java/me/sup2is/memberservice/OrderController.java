@@ -7,16 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
 
-//    @Autowired
-//    private MemberServiceFeignClient memberServiceFeignClient;
-
     @Autowired
-    MemberRestTemplateClient memberRestTemplateClient;
+    private MemberServiceFeignClient memberServiceFeignClient;
 
     @GetMapping("/order")
     public String order() {
-//        return memberServiceFeignClient.getMember().getName() + "님이 주문요청하셨습니다.";
-        return memberRestTemplateClient.getMember().getName() + "님이 주문요청하셨습니다.";
+        return memberServiceFeignClient.getMember().getName() + "님이 주문요청하셨습니다.";
     }
 
 }
