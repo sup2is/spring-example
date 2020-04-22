@@ -1,0 +1,34 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: orderservice
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: memberChangeTopic
+          content-type: application/json
+          group: orderGroup
+      kafka:
+        binder:
+          zkNodes: localhost
+          brokers: localhost
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
