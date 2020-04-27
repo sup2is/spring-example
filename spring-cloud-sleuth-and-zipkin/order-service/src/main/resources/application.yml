@@ -4,17 +4,6 @@ server:
 spring:
   application:
     name: orderservice
-  cloud:
-    stream:
-      bindings:
-        input:
-          destination: memberChangeTopic
-          content-type: application/json
-          group: orderGroup
-      kafka:
-        binder:
-          zkNodes: localhost
-          brokers: localhost
 
 eureka:
   instance:
@@ -25,10 +14,14 @@ eureka:
     serviceUrl:
       defaultZone: http://127.0.0.1:8761/eureka/
 
-
 feign:
   client:
     config:
       default:
         connectTimeout: 5000
         readTimeout: 5000
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
