@@ -2,6 +2,7 @@ package me.sup2is.jwtsecurity.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import me.sup2is.jwtsecurity.member.Member;
 import me.sup2is.jwtsecurity.service.JwtUserDetailsService;
 import me.sup2is.jwtsecurity.config.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,37 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class JwtAuthenticationController {
 
     @Autowired
-    private AuthenticationProvider authenticationProvider;
-
-    @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     private JwtUserDetailsService userDetailService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-        authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
-
-        final UserDetails userDetails = userDetailService.loadUserByUsername(authenticationRequest.getEmail());
-        final String token = jwtTokenUtil.generateToken(userDetails);
-
+        final Member member = userDetailService.authenticateByEmailAndPassword
+                (authenticationRequest.getEmail(), authenticationRequest.getPassword());
+        final String token = jwtTokenUtil.generateToken(member.getEmail());
         return ResponseEntity.ok(new JwtResponse(token));
     }
-
-    private void authenticate(String username, String password) throws Exception {
-        try {
-            authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(username,password));
-        } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
-        } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
-        }
-    }
-
 
 }
 

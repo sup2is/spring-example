@@ -4,6 +4,7 @@ import me.sup2is.jwtsecurity.member.Member;
 import me.sup2is.jwtsecurity.member.MemberRepository;
 import me.sup2is.jwtsecurity.member.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,7 +21,7 @@ import java.util.Set;
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private PasswordEncoder encoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -36,6 +37,17 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
 
         return new User(member.getEmail(), member.getPassword(), grantedAuthorities);
+    }
+
+    public Member authenticateByEmailAndPassword(String email, String password) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email));
+
+        if(!passwordEncoder.matches(password, member.getPassword())) {
+            throw new BadCredentialsException("Password not matched");
+        }
+
+        return member;
     }
 
 }

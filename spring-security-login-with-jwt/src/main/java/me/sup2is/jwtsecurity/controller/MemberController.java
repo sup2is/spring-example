@@ -19,7 +19,7 @@ public class MemberController {
     @PostMapping("/api/member")
     public String saveMember(@RequestBody MemberDto memberDto) {
         memberRepository.save(Member.createMember(memberDto.getEmail(), encode.encode(memberDto.getPassword())));
-        return memberRepository.findAll().toString();
+        return "success";
     }
 
 }
